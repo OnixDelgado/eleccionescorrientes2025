@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elecciones Ctes. 2025</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="manifest" href="icons/site.webmanifest">
+</head>
+<body>
+    <div class="container">
+        <div class="box" id="box1" data-count="0">
+            <span class="count">0</span>
+            <img  class="fotos-candidatos" src="img/candi-1.png">
+        </div>
+        <div class="box" id="box2" data-count="0">
+            <span class="count">0</span>
+            <img  class="fotos-candidatos" src="img/candi-2.png">
+        </div>
+        <div class="box" id="box3" data-count="0">
+            <span class="count">0</span>
+            <img  class="fotos-candidatos" src="img/candi-3.png">
+        </div>
+        <div class="box" id="box4" data-count="0">
+            <span class="count">0</span>
+            <img  class="fotos-candidatos" src="img/candi-4.png">
+        </div>
+    </div>
+
+    <!-- Footer fijo con botones de reinicio y ver conteos -->
+    <footer>
+        <button id="resetButton">Reiniciar</button>
+        <button id="viewCountsButton">Ver Conteos</button>
+        <button id="fullscreenButton">Pantalla Completa</button>
+
+    </footer>
+
+    <!-- Modal de agradecimiento -->
+    <div id="thankYouModal" class="modal">
+        <div class="modal-content">
+            <p>Gracias por Votar</p>
+        <button id="closeModalButton">Aceptar</button>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
