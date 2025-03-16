@@ -1,1 +1,1 @@
-# EleccionesCorrientes2025
+# EleccionesCorrientes2025 Version 1.2.0

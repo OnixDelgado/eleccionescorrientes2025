@@ -1,0 +1,894 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos para el body */
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    display: flex;
+    flex-direction: column; /* Para que el footer esté abajo */
+    background-color: #f0f0f0;
+}
+
+
+/* Estilos para el contenedor principal */
+.container {
+    display: flex;
+    width: 100%;
+    flex: 1; /* Ocupa todo el espacio disponible */
+    margin-top: 40px; /* Margen superior igual a la altura del header */
+    margin-bottom: 60px; /* Margen inferior igual a la altura del footer */
+    height: calc(100vh - 100px); /* Resta la altura del header y del footer */
+}
+
+.box {
+    flex: 1; /* Cada caja ocupa el mismo ancho */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: relative; /* Para posicionar el contador encima de la imagen */
+    overflow: hidden; /* Evita que la imagen se desborde */
+    
+}
+
+.box .count {
+    position: absolute; /* Posiciona el contador encima de la imagen */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejor legibilidad */
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 5;
+}
+
+.fotos-candidatos {
+    width: 100%; /* La imagen ocupa todo el ancho de la caja */
+    height: 100%; /* La imagen ocupa todo el alto de la caja */
+    object-fit: contain; /* La imagen se ajusta para verse completa */
+    position: absolute; /* Posiciona la imagen detrás del contador */
+    top: 0px;
+    left: 0;
+    z-index: 10; /* Asegura que la imagen esté detrás del contador */
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed; /* Fija el footer en la parte inferior */
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+    height: 60px; /* Altura del footer */
+    z-index: 80;
+}
+
+/* Estilos para los botones */
+footer button {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+footer button:hover {
+    background-color: #666;
+}
+
+/* Estilos para el modal */
+
+.titulo-info-app-modal{
+color: #0056b3;
+}
+
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    z-index: 200; /* Asegura que esté por encima de todo */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el mini header */
+.mini-header {
+    background-color: #333;
+    padding: 0 10px; /* Padding solo a los lados, no arriba y abajo */
+    text-align: left;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 40px; /* Altura fija para el header */
+    z-index: 70;
+    display: flex;
+    align-items: center; /* Centra el botón verticalmente */
+}
+
+.mini-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0; /* Elimina el padding del botón */
+}
+
+/* Estilos para el título h1 */
+.mini-header h1 {
+    
+    color: white; /* Color del texto */
+    font-size: 1.3em; /* Tamaño de la fuente */
+    margin: 0; /* Elimina el margen predeterminado */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    font-weight: normal; /* Peso de la fuente (opcional) */
+    flex: 1;
+    text-align: center;
+}
+
+.menu-text {
+    color: white;
+    border-bottom: solid 3px #0056b3;
+    font-size: 2rem;
+}
+
+/* Estilos para el logo de la app al final del header */
+.app-logo-header {
+    height: 30px; /* Ajusta la altura según tu preferencia */
+    margin-left: 10px; /* Espacio entre el título y el logo */
+    vertical-align: middle; /* Alinea verticalmente el logo con el texto del h1 */
+}
+
+/* Estilos para el logo de la app en el Slidebar */
+.app-logo-slidebar {
+    display: block; /* Para que ocupe una línea completa */
+    width: 30%; /* Ajusta el ancho según tu preferencia */
+    max-width: 100px; /* Ancho máximo opcional */
+    margin: 10px auto; /* Centra el logo horizontalmente y agrega margen arriba y abajo */
+}
+
+/* Si colocaste el logo antes del h1, podrías necesitar ajustar el margen izquierdo del h1 */
+.mini-header h1 {
+    color: white;
+    font-size: 1.3em;
+    margin: 0;
+    white-space: nowrap;
+    font-weight: normal;
+    flex: 1;
+    text-align: center;
+    /* Ejemplo si el logo está antes */
+    /* margin-left: 10px; */
+}
+
+/* Estilos para el slidebar */
+.slidebar {
+    position: fixed;
+    top: 0;
+    left: -270px; /* Oculta el slidebar por defecto */
+    width: 270px;
+    height: 100%;
+    background-color: #333;
+    transition: left 0.3s ease;
+    z-index: 90;
+}
+
+.slidebar.open {
+    left: 0; /* Muestra el slidebar */
+}
+
+.slidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.slidebar ul li {
+    margin: 15px 0;
+}
+
+.slidebar ul li button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+}
+
+.slidebar ul li button:hover {
+    background-color: #444;
+}
+
+/* Estilos para el botón "Cerrar Menú" */
+#closeMenuButton {
+    background-color: #007bff; /* Color de fondo azul */
+    color: white; /* Texto blanco */
+    border: none;
+    padding: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    text-align: left; /* Alinea el texto a la izquierda */
+    margin-top: 10px; /* Espacio superior */
+}
+
+#closeMenuButton:hover {
+    background-color: #0056b3; /* Color de fondo azul más oscuro al pasar el mouse */
+}
+
+/* Estilos para el botón de Salir de la App */
+#exitButton {
+    position: absolute; /* Posiciona el botón de manera absoluta */
+    bottom: 20px; /* Distancia desde la parte inferior */
+    left: 10px; /* Distancia desde la izquierda */
+    width: calc(100% - 20px); /* Ancho del botón (ajustado al padding) */
+    background-color: #ff4444; /* Color de fondo rojo */
+    color: white; /* Texto blanco */
+    border: none;
+    padding: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-align: left;
+}
+
+#exitButton:hover {
+    background-color: #cc0000; /* Color de fondo rojo más oscuro al pasar el mouse */
+}
+
+/*Cambiar de color el botón modo*/
+
+#toggleVoteModeButton.modo-activo {
+    background-color: #4CAF50; /* Verde para activo */
+    color: white;
+}
+
+#toggleVoteModeButton.modo-inactivo {
+    background-color: #bd6601; /* Rojo para inactivo */
+    color: white;
+}
+
+/* Estilos para el overlay */
+#overlay {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    z-index: 85; /* Asegura que esté por encima del contenido pero debajo del Slidebar */
+}
+
+/* Cuando el Slidebar está abierto, muestra el overlay */
+.slidebar.open ~ #overlay {
+    display: block;
+}
+
+/*Intercalar forma de votar*/
+
+/* Estilos para el contenedor de la mitad inferior */
+.half-bottom {
+    position: absolute; /* Posiciona el contenedor sobre la imagen */
+    bottom: 0; /* Lo coloca en la parte inferior */
+    left: 0;
+    width: 100%; /* Ocupa todo el ancho de la imagen */
+    height: 50%; /* Ocupa la mitad inferior de la imagen */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el área */
+    z-index: 30; /* Asegura que esté por encima de la imagen */
+    display: none; /* Oculto por defecto */
+}
+
+/* Clase para mostrar el contenedor de la mitad inferior */
+.half-bottom.active {
+    display: block;
+}
+
+/* Botón para cerrar el slidebar */
+#closeSlidebarButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3em;
+    cursor: pointer;
+}
+
+/* Estilos para el modal de información */
+#infoModal {
+    display: none;
+}
+
+/* Estilos para el botón de pantalla completa */
+#fullscreenButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que esté por encima de todo */
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 90%; /* Ancho del modal en dispositivos móviles */
+    max-width: 500px; /* Ancho máximo en pantallas grandes */
+    overflow-y: auto; /* Permite hacer scroll si el contenido es muy largo */
+    max-height: 90vh; /* Altura máxima del modal */
+}
+
+
+/* Estilos para el texto dentro del modal Informacion de la App */
+
+h2 {
+    font-size: 2.3rem;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 1.6rem;
+    margin: 1rem;
+}
+
+.texto-info {
+    font-size: 1rem;
+    margin: 1.4rem;
+    text-align: justify;
+}
+
+/* Estilos para el texto dentro boton AYUDA */
+
+#helpModal .modal-content h2 {
+    /* Tus estilos específicos para el título de ayuda aquí */
+    font-size: 2.2rem; /* Ejemplo */
+    color: #28a745; /* Ejemplo */
+}
+
+#helpModalContent h3 {
+    /* Tus estilos específicos para los nombres de los botones de ayuda aquí */
+    font-size: 1.6rem; /* Ejemplo */
+    color: #007bff; /* Ejemplo */
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+#helpModalContent p {
+    /* Tus estilos específicos para las explicaciones de los botones de ayuda aquí */
+    font-size: 1.1rem; /* Ejemplo */
+    color: #495057; /* Ejemplo */
+    line-height: 1.5;
+    margin-bottom: 0.8em;
+}
+
+/*Boton cerrar en cada modal*/
+
+.modal-content {
+    position: relative; /* Asegúrate de que esta línea esté presente */
+    background-color: #fefefe; /* Ejemplo: si tienes un fondo blanco para el modal */
+    margin: 15% auto; /* Más o menos, dependiendo del tamaño de la pantalla */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ajusta según necesites */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 5px; /* Opcional: bordes redondeados */
+    /* Otros estilos que tengas para .modal-content */
+}
+
+.modal-content .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Reducimos un poco el margen derecho para que no quede tan al borde */
+    font-size: 1.8rem; /* Puedes ajustar el tamaño */
+    font-weight: bold;
+    color: white; /* Cambiamos el color del texto a blanco para que contraste con el rojo */
+    background-color: red; /* Agregamos el fondo rojo */
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 5px; /* Opcional: para darle una forma ligeramente redondeada */
+    padding: 5px 8px; /* Opcional: para hacer el botón un poco más grande */
+}
+
+.modal-content .close-button:hover,
+.modal-content .close-button:focus {
+    background-color: darkred; /* Un rojo más oscuro al pasar el ratón */
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content .close-button:hover,
+.modal-content .close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*Caja Agradecimientos*/
+
+.texto-agradecimientos {
+    margin-top: 1rem;
+    border: 1px solid #000;
+}
+
+.texto-info-final {
+    font-size: 1rem;
+    margin: .7rem;
+    text-align: center;
+    
+}
+
+.lla {
+    color: #4e2a9f;
+}
+
+/* Estilos para el contenedor de la versión y fecha de actualización */
+.version-info {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px; /* Espacio entre la versión y la fecha */
+    align-items: baseline; /* Alinea los textos en la misma línea base */
+}
+
+.version-info .texto-info {
+    margin: 0; /* Elimina el margen predeterminado */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+/* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 1.8rem; /* Tamaño de fuente más pequeño */
+    }
+
+    h3 {
+        font-size: 1.3rem; /* Tamaño de fuente más pequeño */
+        margin: 0.8rem; /* Margen reducido */
+    }
+
+    .texto-info {
+        font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+        margin: 1rem; /* Margen reducido */
+    }
+
+    #closeInfoModalButton {
+        font-size: 0.9em; /* Tamaño de fuente más pequeño */
+    }
+
+    /* Ajustes específicos para el contenedor de versión y fecha */
+    .version-info {
+        flex-direction: column; /* Apila los elementos verticalmente */
+        gap: 5px; /* Reduce el espacio entre los elementos */
+        margin: 1rem;
+    }
+
+    .version-info .texto-info {
+        white-space: normal; /* Permite que el texto se divida en varias líneas */
+    }
+}
+
+/* Estilos para el botón de cerrar */
+#closeInfoModalButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    width: 100%; /* Botón ocupa todo el ancho en móviles */
+}
+
+#closeInfoModalButton:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 1.8rem; /* Tamaño de fuente más pequeño */
+    }
+
+    h3 {
+        font-size: 1.3rem; /* Tamaño de fuente más pequeño */
+        margin: 0.8rem; /* Margen reducido */
+    }
+
+    .texto-info {
+        font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+        margin: 1rem; /* Margen reducido */
+    }
+
+    #closeInfoModalButton {
+        font-size: 0.9em; /* Tamaño de fuente más pequeño */
+    }
+}
+
+#box1 {
+    /* Estilos específicos para la caja 1 */
+    border: 5px solid #4e2a9f;
+    background-color: #4e2a9f;
+    border:  1px solid #f0f0f0;
+
+}
+#box2 {
+    /* Estilos específicos para la caja 2 */
+    border: 5px solid #bd182a;
+    background-color: #bd182a;
+    border:  1px solid #f0f0f0;
+
+}
+#box3 {
+    /* Estilos específicos para la caja 3 */
+    border: 5px solid #18bfdb;
+    background-color: #18bfdb;
+    border:  1px solid #f0f0f0;
+
+}
+#box4 {
+    /* Estilos específicos para la caja 4 */
+    border: 5px solid #2fb33f;
+    background-color: #2fb33f;
+    border:  1px solid #f0f0f0;
+
+}
+
+#resetButton {
+    background-color: #ff4444;
+}
+
+#resetButton:hover {
+    background-color: #cc0000;
+}
+
+#viewCountsButton {
+    background-color: #4CAF50;
+}
+
+#viewCountsButton:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 420px) {
+    #fullscreenButton {
+        display: flex;
+        align-items: center;
+        
+        font-size: .9em;
+    }    
+    #viewCountsButton {
+        display: flex;
+        align-items: center;
+        font-size: .9em;
+    }
+}
+
+/*Responsividad de Telefonos en modo Horizontal desde 520px para abajo*/
+
+@media (max-height: 520px) {
+        #slidebar {
+            width: 180px; /* Reduce el ancho del slidebar */
+            padding: 10px; /* Reduce el padding general del slidebar */
+        }
+    
+        #slidebar .app-logo-slidebar {
+            width: 60px; /* Reduce el tamaño del logo */
+            height: auto;
+            margin-bottom: 8px;
+        }
+    
+        #slidebar ul {
+            padding-left: 10px; /* Ajusta el padding de la lista */
+        }
+    
+        #slidebar ul li {
+            margin-bottom: 5px; /* Reduce el espacio entre los elementos de la lista */
+        }
+    
+        #slidebar ul li button {
+            font-size: 0.8rem; /* Reduce el tamaño de la fuente de los botones */
+            padding: 6px 8px; /* Reduce el padding de los botones */
+        }
+    
+        #slidebar .menu-text {
+            font-size: 0.9rem; /* Reduce el tamaño del texto "Menú" */
+            margin-bottom: 8px;
+        }
+    
+        #slidebar #closeSlidebarButton {
+            font-size: 1.2rem; /* Reduce el tamaño del botón de cerrar */
+            top: 8px;
+            right: 8px;
+        }
+        footer {
+            padding: 8px;
+            height: 40px; /* Mantenemos la altura fija */
+            /* display: flex;  Elimina esta línea */
+            /* justify-content: center; Elimina esta línea */
+            /* align-items: center; Elimina esta línea */
+        }
+        footer button {
+            font-size: 0.8rem;
+            padding: 2px 15px;
+        }
+        /* Estilos para el contenedor principal */
+        .container {
+            display: flex;
+            width: 100%;
+            flex: 1; /* Ocupa todo el espacio disponible */
+            margin-top: 40px; /* Margen superior igual a la altura del header */
+            margin-bottom: 40px; /* Margen inferior igual a la altura del footer */
+            height: calc(100vh - 100px); /* Resta la altura del header y del footer */
+        }
+}
+
+/*Responsividad de Telefonos en modo Horizontal desde 420px para abajo*/
+
+
+@media (max-height: 420px) {
+    #slidebar {
+        width: 150px; /* Reduce aún más el ancho */
+        padding: 8px; /* Reduce aún más el padding */
+    }
+
+    #slidebar .app-logo-slidebar {
+        width: 50px; /* Logo aún más pequeño */
+        margin-bottom: 6px;
+    }
+
+    #slidebar ul {
+        padding-left: 8px; /* Ajusta el padding de la lista */
+    }
+
+    #slidebar ul li {
+        margin-bottom: 4px; /* Reduce aún más el espacio entre elementos */
+    }
+
+    #slidebar ul li button {
+        font-size: 0.7rem; /* Tamaño de fuente más pequeño en botones */
+        padding: 5px 7px; /* Padding de botón más pequeño */
+    }
+
+    #slidebar .menu-text {
+        font-size: 0.8rem; /* Texto "Menú" aún más pequeño */
+        margin-bottom: 6px;
+    }
+
+    #slidebar #closeSlidebarButton {
+        font-size: 1rem; /* Botón de cerrar aún más pequeño */
+        top: 6px;
+        right: 6px;
+    }
+}
+
+/*Responsividad de Telefonos en modo Horizontal desde 380px para abajo*/
+
+@media (max-height: 380px) {
+    #slidebar {
+        width: 130px; /* Ancho aún más reducido */
+        padding: 6px; /* Padding aún más pequeño */
+    }
+
+    #slidebar .app-logo-slidebar {
+        width: 40px; /* Logo más pequeño aún */
+        margin-bottom: 5px;
+    }
+
+    #slidebar ul {
+        padding-left: 6px; /* Ajuste de padding de la lista */
+    }
+
+    #slidebar ul li {
+        margin-bottom: 3px; /* Espacio entre elementos aún más pequeño */
+    }
+
+    #slidebar ul li button {
+        font-size: 0.6rem; /* Tamaño de fuente más pequeño en botones */
+        padding: 4px 6px; /* Padding de botón más pequeño */
+    }
+
+    #slidebar .menu-text {
+        font-size: 0.7rem; /* Texto "Menú" aún más pequeño */
+        margin-bottom: 5px;
+    }
+
+    #slidebar #closeSlidebarButton {
+        font-size: 0.9rem; /* Botón de cerrar aún más pequeño */
+        top: 5px;
+        right: 5px;
+    }
+
+    footer {
+        padding: 5px;
+        height: 30px; /* Mantenemos la altura fija */
+        /* display: flex;  Elimina esta línea */
+        /* justify-content: center; Elimina esta línea */
+        /* align-items: center; Elimina esta línea */
+    }
+    footer button {
+        font-size: 0.7rem;
+        padding: 2px 15px;
+    }
+    /* Estilos para el contenedor principal */
+    .container {
+        display: flex;
+        width: 100%;
+        flex: 1; /* Ocupa todo el espacio disponible */
+        margin-top: 40px; /* Margen superior igual a la altura del header */
+        margin-bottom: 30px; /* Margen inferior igual a la altura del footer */
+        height: calc(100vh - 100px); /* Resta la altura del header y del footer */
+    }
+}
+/*Responsividad de Telefonos en modo Horizontal desde 340px para abajo*/
+
+@media (max-height: 340px) {
+    #slidebar {
+        width: 120px; /* Ancho aún más reducido */
+        padding: 5px; /* Padding aún más pequeño */
+    }
+
+    #slidebar .app-logo-slidebar {
+        width: 35px; /* Logo más pequeño aún */
+        margin-bottom: 4px;
+    }
+
+    #slidebar ul {
+        padding-left: 5px; /* Ajuste de padding de la lista */
+    }
+
+    #slidebar ul li {
+        margin-bottom: 2px; /* Espacio entre elementos aún más reducido */
+    }
+
+    #slidebar ul li button {
+        font-size: 0.55rem; /* Tamaño de fuente más pequeño en botones */
+        padding: 3px 5px; /* Padding de botón más pequeño */
+    }
+
+    #slidebar .menu-text {
+        font-size: 0.65rem; /* Texto "Menú" aún más pequeño */
+        margin-bottom: 4px;
+    }
+
+    #slidebar #closeSlidebarButton {
+        font-size: 0.8rem; /* Botón de cerrar aún más pequeño */
+        top: 4px;
+        right: 4px;
+    }
+}
+
+/*Agrega un Scroll al menu lateral*/
+
+@media (max-height: 320px) {
+    #slidebar {
+        max-height: 320px;
+        overflow-y: auto;
+        width: 100px;
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #slidebar .app-logo-slidebar {
+        width: 30px;
+        margin-bottom: 3px;
+    }
+
+    #slidebar ul {
+        padding-left: 4px;
+        margin-bottom: 0;
+        flex-grow: 1; /* Permite que la lista crezca y ocupe el espacio disponible */
+    }
+
+    #slidebar ul li {
+        margin-bottom: 1px;
+    }
+
+    #slidebar ul li button {
+        font-size: 0.5rem;
+        padding: 2px 4px;
+    }
+
+    #slidebar .menu-text {
+        font-size: 0.6rem;
+        margin-bottom: 3px;
+    }
+
+    #slidebar #closeSlidebarButton {
+        font-size: 0.7rem;
+        top: 3px;
+        right: 3px;
+    }
+
+    /* Estilo específico para el contenedor del botón de Salir */
+    #slidebar > ul > li:last-child {
+        margin-top: auto; /* Empuja este elemento hacia la parte inferior */
+        margin-bottom: 0;
+    }
+
+    #slidebar ul li:last-child button#exitButton {
+        position: sticky;
+        bottom: 0;
+        background-color: #ff4444; /* Restablecemos el fondo rojo */
+        color: white; /* Si tenías texto blanco con el fondo rojo */
+        width: 100%;
+        text-align: center;
+        padding: 5px 0;
+        margin-top: 5px;
+        border: none; /* Si quieres quitarle el borde por defecto del botón */
+        cursor: pointer; /* Para que el cursor indique que es un botón */
+        font-size: 0.5rem; /* Mantén el tamaño de fuente */
+        /* Agrega aquí cualquier otro estilo específico que tuvieras para este botón */
+    }
+
+    /* Asegúrate de que el último li no tenga margen superior automático si usas sticky */
+    #slidebar ul li:last-child {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+

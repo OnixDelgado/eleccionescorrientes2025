@@ -4,29 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elecciones Ctes. 2025</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
 </head>
 <body>
+    <!-- Mini Header con botón de Slidebar -->
+    <header class="mini-header">
+        <button id="slidebarButton">☰</button>
+        <img src="icons/icon-512x512.png" alt="Logo de la App" class="app-logo-header">
+        <h1>Elecciones Corrientes 2025</h1>
+    </header>
+
+    <!-- Slidebar (menú lateral) -->
+    <div id="slidebar" class="slidebar">
+        <img src="icons/icon-512x512.png" alt="Logo de la App" class="app-logo-slidebar">
+        <button id="closeSlidebarButton">&times;</button>
+        <ul>
+            <li class="menu-text">Menú</li>
+            <li>
+                <button id="toggleVoteModeButton" class="modo-activo">
+                    <i id="voteModeIcon" class="fas fa-mouse-pointer"></i> Modo: Tocar Cualquier Parte
+                </button>
+            </li>
+            <li><button id="infoButton"><i class="fas fa-info-circle"></i> Información de la App</button></li>
+            <li>
+                <button id="fullscreenSlidebarButton">
+                    <i class="fas fa-expand"></i> Pantalla Completa
+                </button>
+            </li>
+            <li><button id="helpButton"><i class="fas fa-question-circle"></i> Ayuda</button></li>
+            <li><button id="closeMenuButton"><i class="fas fa-arrow-left"></i> Cerrar Menú</button></li>
+            <li><button id="exitButton"><i class="fas fa-sign-out-alt"></i> Salir de la App</button></li>
+        </ul>
+    </div>
+
+    <!-- Overlay para bloquear interacción con el fondo -->
+    <div id="overlay"></div>
+
+    <!-- Contenedor principal -->
     <div class="container">
         <div class="box" id="box1" data-count="0">
             <span class="count">0</span>
-            <img  class="fotos-candidatos" src="img/candi-1.png">
+            <img class="fotos-candidatos" src="img/candi-1.png" alt="Candidato 1">
+            <div class="half-bottom"></div> <!-- Contenedor para la mitad inferior -->
         </div>
         <div class="box" id="box2" data-count="0">
             <span class="count">0</span>
-            <img  class="fotos-candidatos" src="img/candi-2.png">
+            <img class="fotos-candidatos" src="img/candi-2.png" alt="Candidato 2">
+            <div class="half-bottom"></div> <!-- Contenedor para la mitad inferior -->
         </div>
         <div class="box" id="box3" data-count="0">
             <span class="count">0</span>
-            <img  class="fotos-candidatos" src="img/candi-3.png">
+            <img class="fotos-candidatos" src="img/candi-3.png" alt="Candidato 3">
+            <div class="half-bottom"></div> <!-- Contenedor para la mitad inferior -->
         </div>
         <div class="box" id="box4" data-count="0">
             <span class="count">0</span>
-            <img  class="fotos-candidatos" src="img/candi-4.png">
+            <img class="fotos-candidatos" src="img/candi-4.png" alt="Candidato 4">
+            <div class="half-bottom"></div> <!-- Contenedor para la mitad inferior -->
         </div>
     </div>
 
@@ -34,17 +73,47 @@
     <footer>
         <button id="resetButton">Reiniciar</button>
         <button id="viewCountsButton">Ver Conteos</button>
-        <button id="fullscreenButton">Pantalla Completa</button>
-
     </footer>
 
     <!-- Modal de agradecimiento -->
     <div id="thankYouModal" class="modal">
         <div class="modal-content">
             <p>Gracias por Votar</p>
-        <button id="closeModalButton">Aceptar</button>
+            <button id="closeModalButton">Aceptar</button>
+        </div>
+    </div>
+
+<!-- Modal de información de la APP -->
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span> <h2 class="titulo-info-app-modal">Información de la App</h2>
+        <h3>Elecciones Ctes. 2025</h3>
+        <p class="texto-info"><b>Desarrollado por:</b> Leonel Exequiel Delgado</p>
+        <p class="texto-info"><b>Propósito:</b> Esta aplicación permite a los usuarios simular un proceso de votación para las elecciones de 2025, contabilizando votos de manera interactiva y visual.</p>
+        <p class="texto-info"><b>Fecha de Creación:</b> 28/02/2025</p>
+        <p class="texto-info"><b>Contacto:</b> leonelexequieldelgado@gmail.com</p>
+        <p class="texto-info"><b>Desarrollado para las elecciones de:</b> Gobernador de Corrientes</p>
+        <div class="version-info">
+            <p class="texto-info"><b>Versión:</b> 1.2.0</p>
+            <p class="texto-info"><b>Fecha de Actualización:</b> 14/03/2025</p>
+        </div>
+        <div class="texto-agradecimientos">
+            <p class="texto-info-final"><b>Agradecimientos al equipo de trabajo de:</b></p>
+            <p class="texto-info-final">"Sede de <b class="lla">La Libertad Avanza</b> Bella Vista, Ctes."</p>
+        </div>
+        <button id="closeInfoModalButton">Cerrar</button>
     </div>
 </div>
-<script src="script.js"></script>
+
+<div id="helpModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span> <h2>Ayuda - ¿Qué hace cada botón?</h2>
+        <div id="helpModalContent">
+            </div>
+        <button id="closeHelpModalButton">Cerrar</button>
+    </div>
+</div>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
