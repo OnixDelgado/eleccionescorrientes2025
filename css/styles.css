@@ -51,7 +51,7 @@ body {
     width: 100%; /* La imagen ocupa todo el ancho de la caja */
     height: 100%; /* La imagen ocupa todo el alto de la caja */
     object-fit: contain; /* La imagen se ajusta para verse completa */
-    position: absolute; /* Posiciona la imagen detrás del contador */
+    position: relative; /* Posiciona la imagen detrás del contador */
     top: 0px;
     left: 0;
     z-index: 10; /* Asegura que la imagen esté detrás del contador */
@@ -157,7 +157,6 @@ color: #0056b3;
 
 /* Estilos para el título h1 */
 .mini-header h1 {
-    
     color: white; /* Color del texto */
     font-size: 1.3em; /* Tamaño de la fuente */
     margin: 0; /* Elimina el margen predeterminado */
@@ -167,23 +166,33 @@ color: #0056b3;
     text-align: center;
 }
 
+@media (min-width: 330px) {
+    .mini-header h1 {
+        font-size: 300px;
+    }
+}
+
+
 .menu-text {
     color: white;
     border-bottom: solid 3px #0056b3;
     font-size: 2rem;
+    
 }
 
-/* Estilos para el logo de la app al final del header */
+/* Estilos para el logo de la app al inicio del header */
 .app-logo-header {
+    margin: 0;
     height: 30px; /* Ajusta la altura según tu preferencia */
-    margin-left: 10px; /* Espacio entre el título y el logo */
+    margin-left: 10px; /* Espacio entre el título y el logo *
     vertical-align: middle; /* Alinea verticalmente el logo con el texto del h1 */
 }
 
 /* Estilos para el logo de la app en el Slidebar */
 .app-logo-slidebar {
     display: block; /* Para que ocupe una línea completa */
-    width: 30%; /* Ajusta el ancho según tu preferencia */
+    width: 100px; /* Ajusta el ancho según tu preferencia */
+    height: 100px;
     max-width: 100px; /* Ancho máximo opcional */
     margin: 10px auto; /* Centra el logo horizontalmente y agrega margen arriba y abajo */
 }
@@ -278,6 +287,48 @@ color: #0056b3;
     background-color: #cc0000; /* Color de fondo rojo más oscuro al pasar el mouse */
 }
 
+/*Boton cerrar imagenes del Ayuda*/
+
+/* Estilos para el lightbox */
+
+/* Estilos para el lightbox */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo más oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.lightbox-image {
+    max-width: 95%; /* Ocupa casi todo el ancho de la pantalla */
+    max-height: 95%; /* Ocupa casi todo el alto de la pantalla */
+    object-fit: contain; /* Asegura que la imagen se ajuste sin distorsión */
+}
+
+.lightbox-close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    z-index: 1002;
+    background-color: rgba(215, 23, 23, 0.823);
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.lightbox-close-button:hover {
+    color: #ccc;
+}
+
 /*Cambiar de color el botón modo*/
 
 #toggleVoteModeButton.modo-activo {
@@ -286,7 +337,7 @@ color: #0056b3;
 }
 
 #toggleVoteModeButton.modo-inactivo {
-    background-color: #bd6601; /* Rojo para inactivo */
+    background-color: #bd6601; /* Naranja para inactivo */
     color: white;
 }
 
@@ -402,6 +453,11 @@ h3 {
 
 /* Estilos para el texto dentro boton AYUDA */
 
+#helpModal .modal-content {
+    width: 95%; /* Puedes ajustar este valor según necesites para pantallas más pequeñas */
+    max-width: 700px; /* Este valor controla el ancho máximo en pantallas más grandes. Puedes aumentarlo. */
+}
+
 #helpModal .modal-content h2 {
     /* Tus estilos específicos para el título de ayuda aquí */
     font-size: 2.2rem; /* Ejemplo */
@@ -423,6 +479,7 @@ h3 {
     line-height: 1.5;
     margin-bottom: 0.8em;
 }
+
 
 /*Boton cerrar en cada modal*/
 
@@ -485,6 +542,68 @@ h3 {
     color: #4e2a9f;
 }
 
+/*Los 2 titulos de las imagenes de Ayuda*/
+
+.titulo-ayuda1, .titulo-ayuda2 {
+    margin: 0;
+    font-size: 1.3rem; /* Tamaño del texto */
+    font-weight: bold;
+}
+
+.titulo-ayuda1 {
+    color: #4CAF50;   /* Color del texto */
+}
+
+.titulo-ayuda2 {
+    color: #bd6601;   /* Color del texto */
+}
+
+@media (max-width: 511px) {
+    .titulo-ayuda1, .titulo-ayuda2 {
+        font-size: 1rem; /* Tamaño del texto */
+    }
+}
+
+@media (max-width: 404px) {
+    .titulo-ayuda1, .titulo-ayuda2 {
+        font-size: .7rem; /* Tamaño del texto */
+    }
+}
+
+/*Redes Sociales Iconos*/
+
+/* Estilos para los enlaces de redes sociales */
+.social-links a {
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+/* Estilos para los iconos de redes sociales */
+.social-links a img {
+    width: 2rem; /* Tamaño de los iconos */
+    height: 2rem; /* Tamaño de los iconos */
+    margin: 0 10px; /* Espacio entre los iconos */
+    margin-top: 10px; /* Espacio superior */
+    transition: transform 0.3s ease; /* Transición suave */
+}
+
+/* Efecto de hover para los iconos */
+.social-links a img:hover {
+    transform: scale(1.4); /* Aumenta el tamaño un 40% */
+}
+
+/* Estilos para las imágenes dentro del modal de ayuda */
+#helpModalContent img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+    transition: transform 0.3s ease; /* Agrega una animación suave */
+}
+
+#helpModalContent img:hover {
+    transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el mouse */
+}
+
 /* Estilos para el contenedor de la versión y fecha de actualización */
 .version-info {
     display: flex;
@@ -496,6 +615,32 @@ h3 {
 .version-info .texto-info {
     margin: 0; /* Elimina el margen predeterminado */
     white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+/*Dar estilos al boton de Descargar App (Android)*/
+
+.slidebar-button {
+    display: block; /* Para que ocupe todo el ancho disponible */
+    width: 100%; /* Asegura que el ancho sea del 100% */
+    padding: 10px 15px; /* Espaciado interno (arriba/abajo y izquierda/derecha) */
+    margin-bottom: 5px; /* Un pequeño margen inferior para separarlo de otros elementos */
+    border: none; /* Elimina el borde predeterminado de los botones */
+    background-color: #f0f0f0; /* Un color de fondo gris claro (puedes cambiarlo) */
+    color: #333; /* Color del texto (puedes cambiarlo) */
+    text-align: left; /* Alinea el texto a la izquierda, como suelen estar los elementos de un menú lateral */
+    text-decoration: none; /* Elimina el subrayado predeterminado de los enlaces */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+    border-radius: 5px; /* Opcional: bordes redondeados */
+    font-size: 1em; /* Tamaño de fuente base */
+    transition: background-color 0.3s ease; /* Opcional: una transición suave para el efecto hover */
+}
+
+.slidebar-button:hover {
+    background-color: #e0e0e0; /* Un color ligeramente más oscuro al pasar el ratón (puedes cambiarlo) */
+}
+
+.slidebar-button i {
+    margin-right: 10px; /* Espacio entre el icono y el texto (si estás usando uno) */
 }
 
 /* Estilos responsivos para pantallas pequeñas */
@@ -539,7 +684,7 @@ h3 {
     font-size: 1em;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 100%; /* Botón ocupa todo el ancho en móviles */
 }
 
@@ -627,9 +772,16 @@ h3 {
     }
 }
 
+@media (max-width: 620px) {
+    .titulo-ayuda {
+        white-space: pre;
+        margin-top: 50px;
+    }
+}
+
 /*Responsividad de Telefonos en modo Horizontal desde 520px para abajo*/
 
-@media (max-height: 520px) {
+@media (max-height: 580px) {
         #slidebar {
             width: 180px; /* Reduce el ancho del slidebar */
             padding: 10px; /* Reduce el padding general del slidebar */
@@ -684,12 +836,22 @@ h3 {
             margin-bottom: 40px; /* Margen inferior igual a la altura del footer */
             height: calc(100vh - 100px); /* Resta la altura del header y del footer */
         }
+
+        /*Boton de descargar app*/
+
+        .slidebar-button {
+            padding: 15px 10px; /* Espaciado interno (arriba/abajo y izquierda/derecha) */
+            font-size: .8rem; /* Tamaño de fuente base */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 }
 
 /*Responsividad de Telefonos en modo Horizontal desde 420px para abajo*/
 
 
-@media (max-height: 420px) {
+@media (max-height: 490px) {
     #slidebar {
         width: 150px; /* Reduce aún más el ancho */
         padding: 8px; /* Reduce aún más el padding */
@@ -723,11 +885,21 @@ h3 {
         top: 6px;
         right: 6px;
     }
+
+    /*Boton de descargar app*/
+
+    .slidebar-button {
+        padding: 9px 9px; /* Espaciado interno (arriba/abajo y izquierda/derecha) */
+        font-size: .8rem; /* Tamaño de fuente base */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 /*Responsividad de Telefonos en modo Horizontal desde 380px para abajo*/
 
-@media (max-height: 380px) {
+@media (max-height: 440px) {
     #slidebar {
         width: 130px; /* Ancho aún más reducido */
         padding: 6px; /* Padding aún más pequeño */
@@ -782,10 +954,20 @@ h3 {
         margin-bottom: 30px; /* Margen inferior igual a la altura del footer */
         height: calc(100vh - 100px); /* Resta la altura del header y del footer */
     }
+
+    /*Boton de descargar app*/
+
+    .slidebar-button {
+        padding: 5px 5px; /* Espaciado interno (arriba/abajo y izquierda/derecha) */
+        font-size: .8rem; /* Tamaño de fuente base */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 /*Responsividad de Telefonos en modo Horizontal desde 340px para abajo*/
 
-@media (max-height: 340px) {
+@media (max-height: 400px) {
     #slidebar {
         width: 120px; /* Ancho aún más reducido */
         padding: 5px; /* Padding aún más pequeño */
@@ -819,13 +1001,23 @@ h3 {
         top: 4px;
         right: 4px;
     }
+
+    /*Boton de descargar app*/
+
+    .slidebar-button {
+        padding: 2px 2px; /* Espaciado interno (arriba/abajo y izquierda/derecha) */
+        font-size: .7rem; /* Tamaño de fuente base */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 /*Agrega un Scroll al menu lateral*/
 
-@media (max-height: 320px) {
+@media (max-height: 360px) {
     #slidebar {
-        max-height: 320px;
+        max-height: 360px;
         overflow-y: auto;
         width: 100px;
         padding: 4px;
@@ -889,6 +1081,16 @@ h3 {
     #slidebar ul li:last-child {
         margin-top: 0;
         margin-bottom: 0;
+    }
+
+    /*Boton de descargar app*/
+
+    .slidebar-button {
+        padding: 2px 2px; /* Espaciado interno (arriba/abajo y izquierda/derecha) */
+        font-size: .5rem; /* Tamaño de fuente base */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 

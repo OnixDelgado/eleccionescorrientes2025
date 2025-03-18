@@ -150,46 +150,118 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeMenuButton = document.getElementById('closeMenuButton');
 
     // >>> NUEVO CÓDIGO AYUDA <<<
-    const helpButton = document.getElementById('helpButton');
-    const helpModal = document.getElementById('helpModal'); // Seleccionamos el nuevo modal de ayuda
-    const helpModalTitle = helpModal.querySelector('h2');
-    const helpModalContent = document.getElementById('helpModalContent'); // Seleccionamos el contenedor de contenido del modal de ayuda
-    const closeHelpModalButton = document.getElementById('closeHelpModalButton'); // Seleccionamos el botón de cerrar del modal de ayuda
+const helpButton = document.getElementById('helpButton');
+const helpModal = document.getElementById('helpModal'); // Seleccionamos el nuevo modal de ayuda
+const helpModalTitle = helpModal.querySelector('h2');
+const helpModalContent = document.getElementById('helpModalContent'); // Seleccionamos el contenedor de contenido del modal de ayuda
+const closeHelpModalButton = document.getElementById('closeHelpModalButton'); // Seleccionamos el botón de cerrar del modal de ayuda
 
-    if (helpButton && helpModal) {
-        helpButton.addEventListener('click', function () {
-            helpModalTitle.textContent = 'Ayuda - ¿Qué hace cada botón?';
-            // Limpiamos el contenido anterior del modal
-            helpModalContent.innerHTML = ''; // Usamos innerHTML para limpiar el contenido
+if (helpButton && helpModal) {
+    helpButton.addEventListener('click', function () {
+        helpModalTitle.innerHTML = 'Ayuda<br>¿Qué hace cada botón?';
+        helpModalContent.innerHTML = '';
 
-            // Definimos las explicaciones para cada botón
-            const buttonExplanations = {
-                'toggleVoteModeButton': '<b>Modo:</b> Permite cambiar entre tocar cualquier parte de la imagen para votar o solo la mitad inferior.',
-                'infoButton': '<b>Información de la App:</b> Muestra detalles sobre esta aplicación, su desarrollo y la versión actual.',
-                'fullscreenSlidebarButton': '<b>Pantalla Completa:</b> Abre el contenido principal de la aplicación en modo de pantalla completa.',
-                'closeMenuButton': '<b>Cerrar Menú:</b> Cierra este menú lateral.',
-                'exitButton': '<b>Salir de la App:</b> Cierra la aplicación por completo (puede no funcionar en todos los navegadores o entornos).',
-                'helpButton': '<b>Ayuda:</b> Muestra esta explicación de los botones.'
-            };
+        const buttonExplanations = {
+            'toggleVoteModeButton': `
+                <b>Modo de Votación:</b> Cambia la forma de votar entre tocar cualquier parte de la imagen de los candidatos (predeterminado) y tocar únicamente la mitad inferior, ideal para evitar votos no intencionados o prevenir que toquen a los referentes que se muestra arriba de la imagen del candidato.<br><br>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 48%;">
+                        <span class="titulo-ayuda1">Tocar Cualquier parte</span>
+                        <img src="img/ejemploVotar1.png" alt="Ejemplo Modo Completo" style="max-width: 100%; height: auto; cursor: pointer;" class="enlargeable-image">
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 48%;">
+                        <span class="titulo-ayuda2">Tocar parte inferior</span>
+                        <img src="img/ejemploVotar2.png" alt="Ejemplo Modo Mitad Inferior" style="max-width: 100%; height: auto; cursor: pointer;" class="enlargeable-image">
+                    </div>
+                </div>
+            `,
+            'infoButton': '<b>Información de la App:</b> Muestra detalles sobre esta aplicación, su desarrollo y la versión actual.',
+            'fullscreenSlidebarButton': '<b>Pantalla Completa:</b> Abre el contenido principal de la aplicación en modo de pantalla completa.',
+            'helpButton': '<b>Ayuda:</b> Muestra esta explicación de los botones.',
+            'downloadAppButton': `
+            <b>Descargar App (Android):</b> Permite descargar la aplicación en dispositivos Android para usarla sin necesidad de conexión a internet. 
+            Al hacer clic, se abrirá un enlace externo para descargar el archivo APK. Una vez instalada, la aplicación funciona completamente offline, 
+            lo que la hace ideal para usar en lugares con poca o ninguna conectividad.`,
+            'closeMenuButton': '<b>Cerrar Menú:</b> Cierra este menú lateral.',
+            'exitButton': '<b>Salir de la App:</b> Cierra la aplicación por completo (puede no funcionar en todos los navegadores o entornos como App Movil).',
+            
+        };
 
-            // Creamos elementos HTML para mostrar las explicaciones
-            for (const buttonId in buttonExplanations) {
-                const button = document.getElementById(buttonId);
-                if (button) {
-                    const explanationTitle = document.createElement('h3');
-                    explanationTitle.textContent = button.textContent.replace(/<i[^>]*>.*?<\/i>/g, '').trim(); // Obtenemos el texto del botón limpiando el icono
-                    const explanationParagraph = document.createElement('p');
-                    explanationParagraph.innerHTML = buttonExplanations[buttonId];
-                    helpModalContent.appendChild(explanationTitle);
-                    helpModalContent.appendChild(explanationParagraph);
+        for (const buttonId in buttonExplanations) {
+            const button = document.getElementById(buttonId);
+            if (button) {
+                const explanationTitle = document.createElement('h3');
+                let titleText = button.textContent.replace(/<i[^>]*>.*?<\/i>/g, '').trim();
+
+                if (buttonId === 'toggleVoteModeButton') {
+                    titleText = 'Alternar Modo de Votación';
                 }
-            }
 
-            helpModal.style.display = 'flex'; // Mostramos el modal de ayuda
-            slidebar.classList.remove('open'); // Cerramos el slidebar al mostrar la ayuda
-            overlay.style.display = 'none';
+                explanationTitle.textContent = titleText;
+                const explanationParagraph = document.createElement('p');
+                explanationParagraph.innerHTML = buttonExplanations[buttonId];
+                helpModalContent.appendChild(explanationTitle);
+                helpModalContent.appendChild(explanationParagraph);
+            }
+        }
+
+        // --- NUEVO CÓDIGO PARA EL LIGHTBOX ---
+        const enlargeableImages = helpModalContent.querySelectorAll('.enlargeable-image');
+        enlargeableImages.forEach(img => {
+            img.addEventListener('click', function () {
+                const imageUrl = this.src;
+                createLightbox(imageUrl);
+            });
         });
-    }
+        // --- FIN NUEVO CÓDIGO PARA EL LIGHTBOX ---
+
+        helpModal.style.display = 'flex';
+        slidebar.classList.remove('open');
+        overlay.style.display = 'none';
+    });
+}
+    
+    // Función para crear el lightbox
+// Función para crear el lightbox
+function createLightbox(imageUrl) {
+    const lightboxOverlay = document.createElement('div');
+    lightboxOverlay.classList.add('lightbox-overlay');
+
+    const lightboxImage = document.createElement('img');
+    lightboxImage.src = imageUrl;
+    lightboxImage.classList.add('lightbox-image');
+
+    // Crear el botón de cerrar
+    const closeButton = document.createElement('span');
+    closeButton.innerHTML = '&times;';
+    closeButton.classList.add('lightbox-close-button');
+
+    lightboxOverlay.appendChild(lightboxImage);
+    lightboxOverlay.appendChild(closeButton);
+    document.body.appendChild(lightboxOverlay);
+
+    // Cerrar el lightbox al hacer clic fuera de la imagen
+    lightboxOverlay.addEventListener('click', function (event) {
+        if (event.target === lightboxOverlay) {
+            document.body.removeChild(lightboxOverlay);
+        }
+    });
+
+    // Cerrar el lightbox al hacer clic en el botón de cerrar
+    closeButton.addEventListener('click', function () {
+        document.body.removeChild(lightboxOverlay);
+    });
+
+    // Cerrar el lightbox al presionar la tecla Escape
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            document.body.removeChild(lightboxOverlay);
+        }
+    });
+
+    lightboxImage.style.width = '90vw'; // 90% del ancho de la ventana
+    lightboxImage.style.height = '90vh'; // 90% del alto de la ventana
+}
 
     // Agregamos un event listener para cerrar el nuevo modal de ayuda
     if (closeHelpModalButton) {
