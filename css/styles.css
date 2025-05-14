@@ -20,7 +20,7 @@ body {
     display: flex;
     width: 100%;
     flex: 1; /* Ocupa todo el espacio disponible */
-    margin-top: 40px; /* Margen superior igual a la altura del header */
+    margin-top: 50px; /* Margen superior igual a la altura del header */
     margin-bottom: 60px; /* Margen inferior igual a la altura del footer */
     height: calc(100vh - 100px); /* Resta la altura del header y del footer */
 }
@@ -89,32 +89,225 @@ footer button:hover {
     background-color: #666;
 }
 
-/* Estilos para el modal */
+/*Estilo para modal de contraseña*/
 
-.titulo-info-app-modal{
-color: #0056b3;
+#passwordInput {
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.modal {
-    display: none; /* Oculto por defecto */
+#submitPasswordButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#submitPasswordButton:hover {
+    background-color: #0056b3;
+}
+
+/*Estilo modal de conteo*/
+
+/* Estilo para filas de conteo */
+.voto-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.voto-fila:last-child {
+    border-bottom: none;
+    margin-bottom: 1rem;
+}
+
+.voto-nombre {
+    font-size: 24px;  /* Tamaño aumentado */
+    font-weight: bold;
+    color: #333;
+}
+
+.voto-cantidad {
+    font-size: 28px;  /* Tamaño aún más grande */
+    font-weight: bold;
+    background: #f8f9fa;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: #4e2a9f;  /* Color morado (ajustable) */
+}
+
+@media (max-width: 768px) {
+    .voto-nombre {
+        font-size: 20px;
+    }
+    .voto-cantidad {
+        font-size: 24px;
+    }
+}
+
+.voto-nombre.box1 { color: #4e2a9f; }
+.voto-nombre.box2 { color: #bd182a; }
+.voto-nombre.box3 { color: #18bfdb; }
+.voto-nombre.box4 { color: #2fb33f; }
+
+/*Modal de estadisticas*/
+
+/* Estilo para el modal de estadísticas (pantalla casi completa) */
+#statsModal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-    justify-content: center;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
     align-items: center;
-    font-size: 2em;
-    z-index: 200; /* Asegura que esté por encima de todo */
+    justify-content: center;
 }
 
-.modal-content {
-    background-color: white;
-    padding: 2rem;
+.stats-modal-content {
+    background: white;
+    width: 90%;
+    height: 90%;
+    padding: 20px;
     border-radius: 10px;
+    overflow-y: auto;
+}
+
+/* Botones del modal de conteo */
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Estilos para el modal de los demas*/
+
+.titulo-info-app-modal{
+color: #0056b3;
+}
+
+/* Estilo base para todos los modales (compartido) */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos generales para TODOS los modales */
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: auto; /* Centrado vertical/horizontal */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrado horizontal interno */
+    text-align: center; /* Centrado de texto */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Contenido del modal (para alinear elementos) */
+.modal-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Específico para modal de estadísticas (más ancho) */
+#statsModal .modal-content {
+    width: 95%;
+    max-width: 1200px;
+    height: 90%;
+    padding: 20px;
+}
+
+/* Para los demás modales (más angostos) */
+#voteCountsModal .modal-content,
+#thankYouModal .modal-content {
+    width: 90%;
+    max-width: 800px;
+}
+
+/* Títulos centrados */
+.modal-content h2 {
+    width: 100%;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+/* Botones centrados */
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Gráficos con ancho controlado */
+#chartsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#chartsContainer canvas {
+    max-width: 100%;
+    height: auto !important;
+}
+
+/* Estilo específico para el modal de estadísticas */
+#statsModal .modal-content {
+    width: 95%;
+    max-width: 1200px; 
+    height: 90%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Organiza contenido verticalmente */
+}
+
+/* Estilo para los demás modales (más angostos) */
+#voteCountsModal .modal-content, 
+#thankYouModal .modal-content {
+    width: 90%;
+    max-width: 800px; /* Ancho estándar */
+}
+
+#chartsContainer {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre gráficos */
+    overflow: auto; /* Scroll si es necesario */
+}
+
+#chartsContainer canvas {
+    width: 100% !important; 
+    height: auto !important;
+    max-height: 400px; /* Altura máxima para cada gráfico */
+    min-height: 400px; /* Altura mínima */
 }
 
 .modal-content button {
@@ -132,6 +325,8 @@ color: #0056b3;
     background-color: #0056b3;
 }
 
+
+
 /* Estilos para el mini header */
 .mini-header {
     background-color: #333;
@@ -140,7 +335,7 @@ color: #0056b3;
     position: fixed;
     top: 0;
     width: 100%;
-    height: 40px; /* Altura fija para el header */
+    height: 50px; /* Altura fija para el header */
     z-index: 70;
     display: flex;
     align-items: center; /* Centra el botón verticalmente */
@@ -1094,3 +1289,35 @@ h3 {
     }
 }
 
+@media (max-width: 500px) {
+    #statsModal .modal-content {
+        width: 100%; /* Ocupa todo el ancho */
+        height: 100%; /* Ocupa toda la altura */
+        max-width: none;
+        border-radius: 0; /* Sin bordes redondeados */
+        padding: 15px 10px; /* Padding reducido */
+    }
+
+    /* Ajuste de gráficos */
+    #chartsContainer {
+        flex-direction: column; /* Apila gráficos verticalmente */
+        gap: 15px; /* Espaciado reducido */
+    }
+
+    #chartsContainer canvas {
+        max-height: 250px !important; /* Altura reducida */
+        min-height: 200px !important;
+    }
+
+    /* Textos y títulos */
+    #statsModal h2 {
+        font-size: 1.3rem; /* Título más pequeño */
+        margin-bottom: 15px;
+    }
+
+    /* Botones (si los hay) */
+    #statsModal .modal-buttons {
+        flex-direction: column; /* Apila botones */
+        gap: 8px;
+    }
+}

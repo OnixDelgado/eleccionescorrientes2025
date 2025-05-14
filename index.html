@@ -95,8 +95,8 @@
         <p class="texto-info"><b>Contacto:</b> leonelexequieldelgado@gmail.com</p>
         <p class="texto-info"><b>Hecho para elecciones de:</b> Gobernador de Corrientes</p>
         <div class="version-info">
-            <p class="texto-info"><b>Versión:</b> 1.2.0</p>
-            <p class="texto-info"><b>Fecha de Actualización:</b> 18/03/2025</p>
+            <p class="texto-info"><b>Versión:</b> 1.3.0</p>
+            <p class="texto-info"><b>Fecha de Actualización:</b> 14/05/2025</p>
         </div>
         <div class="texto-agradecimientos">
             <p class="texto-info-final"><b>Agradecimientos al equipo de trabajo de:</b></p>
@@ -130,6 +130,37 @@
     </div>
 </div>
 
+<!-- Modal de ingreso de contraseña -->
+<div id="passwordModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" id="closePasswordModal">&times;</span>
+        <h2 class="titulo-info-app-modal">Ingrese la contraseña</h2>
+        <input type="password" id="passwordInput" placeholder="Contraseña..." style="width: 100%; padding: 10px; margin: 1rem 0; font-size: 1rem;">
+        <button id="submitPasswordButton">Aceptar</button>
+    </div>
+</div>
+
+
+<!-- Modal de conteo de votos -->
+<div id="voteCountsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" id="closeVoteCountsModal">&times;</span>
+        <h2 class="titulo-info-app-modal">Conteo de Votos</h2>
+        <div id="voteCountsContent" class="texto-info" style="text-align: left; margin-top: 1rem;"></div>
+        <button id="showStats">Ver Estadísticas</button> <!-- Botón nuevo -->
+        <button id="closeVoteCountsButton">Cerrar</button>
+    </div>
+</div>
+
+<div id="statsModal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Estadísticas de Votos</h2>
+        <div id="chartsContainer"></div>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

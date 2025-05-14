@@ -40,45 +40,111 @@ if (closeModalButton) {
     closeModalButton.addEventListener('click', hideThankYouModal);
 }
 
-// Función para reiniciar los contadores
-function resetCounters() {
-    const password = prompt("Ingrese la contraseña para reiniciar los contadores:");
-    if (password === "llabv2025") {
-        document.querySelectorAll('.box').forEach(box => {
-            box.setAttribute('data-count', 0); // Reiniciar el contador
-            box.querySelector('.count').textContent = 0; // Actualizar el texto
-            localStorage.removeItem(box.id); // Eliminar el valor del LocalStorage
-        });
-        alert("Contadores reiniciados correctamente.");
-    } else {
-        alert("Contraseña incorrecta. No se reiniciaron los contadores.");
-    }
-}
-
 // Mapeo de nombres personalizados
 const nombresPersonalizados = {
     box1: "La Libertad Avanza",
-    box2: "UCR - V.C.",
-    box3: "UxP - Peronismo C.",
+    box2: "UCR - Vamos Corrientes",
+    box3: "UxP - Peronismo Correntino",
     box4: "UCR - eCo"
 };
 
-// Función para ver los conteos actuales
+const coloresPartidos = {
+    box1: '#4e2a9f', // La Libertad Avanza
+    box2: '#bd182a', // UCR - Vamos Corrientes
+    box3: '#18bfdb', // UxP - Peronismo Correntino
+    box4: '#2fb33f'  // UCR - eCo
+};
+
+
+function promptPassword(callback) {
+    const modal = document.getElementById('passwordModal');
+    const input = document.getElementById('passwordInput');
+    const submitButton = document.getElementById('submitPasswordButton');
+
+    input.value = ''; // Limpiar campo
+    modal.style.display = 'flex';
+
+    // Previene duplicar listeners
+    const handler = function () {
+        const password = input.value.trim();
+        if (password === "llabv2025") {
+            modal.style.display = 'none';
+            callback(); // Ejecutar la acción protegida
+        } else {
+            alert("Contraseña incorrecta.");
+        }
+    };
+
+    submitButton.onclick = handler;
+
+    input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') handler();
+    });
+
+    // Botón cerrar
+    document.getElementById('closePasswordModal').onclick = () => {
+        modal.style.display = 'none';
+    };
+}
+
+// Acción de ver conteos
 function viewCounts() {
-    const password = prompt("Ingrese la contraseña para ver los conteos:");
-    if (password === "llabv2025") {
-        let countsMessage = "Conteos actuales:\n\n";
+    promptPassword(() => {
+        const voteCountsContent = document.getElementById('voteCountsContent');
+        voteCountsContent.innerHTML = '';
+
         document.querySelectorAll('.box').forEach(box => {
             const id = box.id;
-            const nombre = nombresPersonalizados[id] || id; // Usar el nombre personalizado o el ID si no existe
+            const nombre = nombresPersonalizados[id] || id;
             const count = box.getAttribute('data-count');
-            countsMessage += `${nombre}: ${count}\n`;
+
+            const fila = document.createElement('div');
+            fila.classList.add('voto-fila');
+
+            const nombreElem = document.createElement('span');
+            nombreElem.classList.add('voto-nombre', id); // Clase + ID
+            nombreElem.textContent = nombre;
+
+            const cantidadElem = document.createElement('span');
+            cantidadElem.classList.add('voto-cantidad');
+            cantidadElem.textContent = count;
+
+            fila.appendChild(nombreElem);
+            fila.appendChild(cantidadElem);
+            voteCountsContent.appendChild(fila);
         });
-        alert(countsMessage);
-    } else {
-        alert("Contraseña incorrecta. No se pueden ver los conteos.");
-    }
+
+        document.getElementById('voteCountsModal').style.display = 'flex';
+    });
 }
+
+// Acción de reiniciar contadores
+function resetCounters() {
+    promptPassword(() => {
+        document.querySelectorAll('.box').forEach(box => {
+            box.setAttribute('data-count', 0);
+            box.querySelector('.count').textContent = 0;
+            localStorage.removeItem(box.id);
+        });
+        alert("Contadores reiniciados correctamente.");
+    });
+}
+
+
+// Cerrar modal de conteos
+const closeVoteCountsX = document.getElementById('closeVoteCountsModal');
+const closeVoteCountsButton = document.getElementById('closeVoteCountsButton');
+const voteCountsModal = document.getElementById('voteCountsModal');
+
+if (closeVoteCountsX && closeVoteCountsButton && voteCountsModal) {
+    closeVoteCountsX.addEventListener('click', () => {
+        voteCountsModal.style.display = 'none';
+    });
+    closeVoteCountsButton.addEventListener('click', () => {
+        voteCountsModal.style.display = 'none';
+    });
+}
+
 
 // Asignar la función de reinicio al botón
 const resetButton = document.getElementById('resetButton');
@@ -92,16 +158,31 @@ if (viewCountsButton) {
     viewCountsButton.addEventListener('click', viewCounts);
 }
 
+// Función para detectar si estamos en Cordova
+function isCordova() {
+    return !!window.cordova; // Devuelve true si está en Cordova, false si está en un navegador
+}
+
 // Función para alternar el modo pantalla completa
 function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-        // Entrar en modo pantalla completa
-        document.documentElement.requestFullscreen().catch(err => {
-            alert(`Error al intentar entrar en modo pantalla completa: ${err.message}`);
-        });
+    if (isCordova()) {
+        // Código para Cordova
+        if (window.AndroidFullScreen) {
+            AndroidFullScreen.immersiveMode(); // Habilita el modo inmersivo
+        } else {
+            alert("El plugin de pantalla completa no está disponible.");
+        }
     } else {
-        // Salir del modo pantalla completa
-        document.exitFullscreen();
+        // Código para navegador web
+        if (!document.fullscreenElement) {
+            // Entrar en modo pantalla completa
+            document.documentElement.requestFullscreen().catch(err => {
+                alert(`Error al intentar entrar en modo pantalla completa: ${err.message}`);
+            });
+        } else {
+            // Salir del modo pantalla completa
+            document.exitFullscreen();
+        }
     }
 }
 
@@ -109,10 +190,16 @@ function toggleFullscreen() {
 function updateFullscreenButton() {
     const fullscreenButton = document.getElementById('fullscreenSlidebarButton');
     if (fullscreenButton) {
-        if (document.fullscreenElement) {
+        if (isCordova()) {
+            // Cambiar el texto y el ícono para Cordova
             fullscreenButton.innerHTML = '<i class="fas fa-compress"></i> Cerrar Pantalla Completa';
         } else {
-            fullscreenButton.innerHTML = '<i class="fas fa-expand"></i> Pantalla Completa';
+            // Cambiar el texto y el ícono para navegador web
+            if (document.fullscreenElement) {
+                fullscreenButton.innerHTML = '<i class="fas fa-compress"></i> Cerrar Pantalla Completa';
+            } else {
+                fullscreenButton.innerHTML = '<i class="fas fa-expand"></i> Pantalla Completa';
+            }
         }
     }
 }
@@ -412,5 +499,103 @@ const closeHelpModalX = document.querySelector('#helpModal .close-button');
 if (closeHelpModalX) {
     closeHelpModalX.addEventListener('click', function () {
         document.getElementById('helpModal').style.display = 'none';
+    });
+}
+
+// 1. Mostrar estadísticas al hacer clic en el botón
+document.getElementById('showStats').addEventListener('click', () => {
+    document.getElementById('voteCountsModal').style.display = 'none';
+    document.getElementById('statsModal').style.display = 'flex';
+    renderCharts(); // Función para generar gráficos
+});
+
+// 2. Cerrar el modal de estadísticas
+document.querySelector('#statsModal .close-button').addEventListener('click', () => {
+    document.getElementById('statsModal').style.display = 'none';
+});
+
+// También puedes agregar cierre al hacer clic fuera del contenido
+document.getElementById('statsModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.style.display = 'none';
+    }
+});
+
+// 3. Función para renderizar gráficos (usa Chart.js o similar)
+function renderCharts() {
+    const chartsContainer = document.getElementById('chartsContainer');
+    if (!chartsContainer) {
+        console.error("No se encontró el contenedor de gráficos");
+        return;
+    }
+    chartsContainer.innerHTML = '';
+
+    // 1. Crear y agregar elementos canvas
+    const pieCanvas = document.createElement('canvas');
+    pieCanvas.id = 'pieChart';
+    chartsContainer.appendChild(pieCanvas);
+
+    const barCanvas = document.createElement('canvas');
+    barCanvas.id = 'barChart';
+    chartsContainer.appendChild(barCanvas);
+
+    // 2. Obtener y validar datos
+    const votes = Array.from(document.querySelectorAll('.box')).map(box => {
+        const count = parseInt(box.getAttribute('data-count'));
+        return isNaN(count) ? 0 : count;
+    });
+    const totalVotes = votes.reduce((sum, count) => sum + count, 0);
+
+    // 3. Configurar datos con colores personalizados
+    const data = {
+        labels: Object.values(nombresPersonalizados),
+        datasets: [{
+            data: votes,
+            backgroundColor: Object.keys(nombresPersonalizados).map(id => coloresPartidos[id]),
+            borderColor: '#fff',
+            borderWidth: 1
+        }]
+    };
+
+    // 4. Función para etiquetas con votos y porcentaje
+    const formatLabel = (value) => {
+        if (totalVotes === 0) return '0 votos (0%)';
+        const percentage = ((value / totalVotes) * 100).toFixed(1);
+        return `${value} votos (${percentage}%)`;
+    };
+
+    // 5. Renderizar gráficos
+    new Chart(pieCanvas, {
+        type: 'pie',
+        data: data,
+        plugins: [ChartDataLabels],
+        options: {
+            responsive: true,
+            plugins: {
+                datalabels: {
+                    color: 'white',
+                    font: { weight: 'bold' },
+                    formatter: formatLabel
+                }
+            }
+        }
+    });
+
+    new Chart(barCanvas, {
+        type: 'bar',
+        data: data,
+        plugins: [ChartDataLabels],
+        options: {
+            responsive: true,
+            scales: { y: { beginAtZero: true } },
+            plugins: {
+                datalabels: {
+                    color: '#333',
+                    anchor: 'end',
+                    align: 'top',
+                    formatter: formatLabel
+                }
+            }
+        }
     });
 }
