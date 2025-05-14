@@ -1,7 +1,7 @@
 # Elecciones Corrientes 2025 - Simulador Interactivo de Votación
 
 [![Link a la App Web](https://img.shields.io/badge/Ver%20App%20Web-Elecciones%202025-brightgreen)](https://onixdelgado.github.io/eleccionescorrientes2025/)
-[![Descargar APK (Android)](https://img.shields.io/badge/Descargar%20APK-Android-blue)](https://drive.google.com/file/d/16Qj7LC_tQaiYp17TimPr8E_mBNX-uVe0/view?usp=sharing)
+[![Descargar APK (Android)](https://img.shields.io/badge/Descargar%20APK-Android-blue)](https://drive.google.com/file/d/1onFyBBtS1II7eutpRY7n5JXZ3YDNWkTv/view?usp=sharing)
 
 ¡Bienvenido/a al repositorio de Elecciones Corrientes 2025! Esta es una aplicación web personal desarrollada para simular el proceso de votación de las elecciones de la provincia de Corrientes en el año 2025. El objetivo principal es ofrecer una experiencia interactiva y visual para entender cómo se podrían contabilizar los votos en un escenario electoral.
 
