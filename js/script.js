@@ -599,3 +599,98 @@ function renderCharts() {
         }
     });
 }
+
+// Variables para el modo de imágenes
+let imageMode = 'candidates'; // 'candidates' o 'parties'
+
+// Mapeo de imágenes para cada modo
+const imageSources = {
+    candidates: {
+        box1: "img/candi-1.png",
+        box2: "img/candi-2.png", 
+        box3: "img/candi-3.png",
+        box4: "img/candi-4.png"
+    },
+    parties: {
+        box1: "img/partido-1.png", // Imagen para La Libertad Avanza
+        box2: "img/partido-2.png", // Imagen para UCR - Vamos Corrientes
+        box3: "img/partido-3.png", // Imagen para UxP - Peronismo Correntino
+        box4: "img/partido-4.png"  // Imagen para UCR - eCo
+    }
+};
+
+// Función para cambiar entre modos de imágenes
+function toggleImageMode() {
+    imageMode = imageMode === 'candidates' ? 'parties' : 'candidates';
+    updateImages();
+    saveImageMode();
+    
+    // Mostrar mensaje de confirmación
+    const modeName = imageMode === 'candidates' ? 'Candidatos' : 'Partidos Políticos';
+    alert(`Modo cambiado a: ${modeName}`);
+}
+
+// Función para actualizar las imágenes según el modo actual
+function updateImages() {
+    const sources = imageSources[imageMode];
+    
+    document.querySelectorAll('.box').forEach(box => {
+        const id = box.id;
+        const imgElement = box.querySelector('.fotos-candidatos');
+        if (imgElement && sources[id]) {
+            imgElement.src = sources[id];
+        }
+    });
+}
+
+// Función para guardar el modo de imagen en localStorage
+function saveImageMode() {
+    localStorage.setItem('imageMode', imageMode);
+}
+
+// Función para cargar el modo de imagen desde localStorage
+function loadImageMode() {
+    const savedMode = localStorage.getItem('imageMode');
+    if (savedMode) {
+        imageMode = savedMode;
+        updateImages();
+    }
+}
+
+// Inicializar el menú desplegable superior derecho
+function initTopRightMenu() {
+    const menuButton = document.getElementById('topRightMenuButton');
+    const dropdown = document.getElementById('topRightDropdown');
+    const dropdownOverlay = document.getElementById('dropdownOverlay');
+    const toggleImageButton = document.getElementById('toggleImageModeButton');
+    
+    if (!menuButton || !dropdown) return;
+    
+    // Alternar visibilidad del menú
+    menuButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+        dropdownOverlay.style.display = dropdown.classList.contains('show') ? 'block' : 'none';
+    });
+    
+    // Cerrar menú al hacer clic fuera
+    dropdownOverlay.addEventListener('click', function() {
+        dropdown.classList.remove('show');
+        dropdownOverlay.style.display = 'none';
+    });
+    
+    // Manejar el cambio de modo de imágenes
+    if (toggleImageButton) {
+        toggleImageButton.addEventListener('click', function() {
+            toggleImageMode();
+            dropdown.classList.remove('show');
+            dropdownOverlay.style.display = 'none';
+        });
+    }
+}
+
+// Cargar el modo de imagen al iniciar
+document.addEventListener('DOMContentLoaded', function() {
+    loadImageMode();
+    initTopRightMenu();
+});

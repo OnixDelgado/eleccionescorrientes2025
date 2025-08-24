@@ -19,6 +19,18 @@
         <h1>Elecciones Corrientes 2025</h1>
     </header>
 
+    <!-- Menú desplegable superior derecho -->
+    <div class="top-right-menu">
+        <button id="topRightMenuButton">
+            <i class="fas fa-exchange-alt"></i>
+        </button>
+        <div id="topRightDropdown" class="dropdown-content">
+            <button id="toggleImageModeButton">
+                <i class="fas fa-sync-alt"></i> Cambio de Modo
+            </button>
+        </div>
+    </div>
+
     <!-- Slidebar (menú lateral) -->
     <div id="slidebar" class="slidebar">
         <img src="icons/icon-512x512.png" alt="Logo de la App" class="app-logo-slidebar">
@@ -45,7 +57,8 @@
 
     <!-- Overlay para bloquear interacción con el fondo -->
     <div id="overlay"></div>
-
+    <!-- Overlay para cerrar menú desplegable superior derecho -->
+    <div id="dropdownOverlay"></div>
     <!-- Contenedor principal -->
     <div class="container">
         <div class="box" id="box1" data-count="0">

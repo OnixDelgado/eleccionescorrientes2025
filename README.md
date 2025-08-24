@@ -75,7 +75,7 @@ Agradecimientos al equipo de trabajo de:
 
 ## Versión Actual
 
-Versión 1.3.0 - Fecha de Actualización: 14/05/2025
+Versión 1.4.0 - Fecha de Actualización: 24/08/2025
 
 ---
 
